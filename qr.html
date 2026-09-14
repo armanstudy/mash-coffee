@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QR کد منوی مش کافی</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&family=Lalezar&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<style>
+  :root{ --ink:#2B1D15; --accent:#C0721C; --ground:#FBF4EA; }
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background:var(--ground); color:var(--ink); font-family:"Vazirmatn",sans-serif;
+    direction:rtl; padding:24px;
+  }
+  .card{
+    background:#fff; border-radius:20px; padding:36px 32px; text-align:center;
+    box-shadow:0 8px 30px rgba(43,29,21,.12); max-width:360px; width:100%;
+  }
+  h1{ font-family:"Lalezar",sans-serif; font-weight:400; font-size:1.8rem; margin:0 0 4px; }
+  p.sub{ margin:0 0 20px; color:#7B5F4C; font-size:.9rem; }
+  canvas{ width:100%; height:auto; max-width:260px; border-radius:12px; }
+  .actions{ margin-top:20px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
+  a.btn, button.btn{
+    display:inline-block; padding:9px 18px; border-radius:10px; text-decoration:none;
+    background:var(--accent); color:#fff; font-weight:500; border:none; cursor:pointer; font-family:inherit; font-size:.9rem;
+  }
+  a.btn.outline{ background:none; color:var(--accent); border:1px solid var(--accent); }
+  @media print{
+    body{background:#fff}
+    .actions, p.sub{display:none}
+    .card{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>مش کافی</h1>
+    <p class="sub">برای دیدن منو، کد را اسکن کنید</p>
+    <canvas id="qr"></canvas>
+    <div class="actions">
+      <button class="btn" onclick="window.print()">چاپ</button>
+      <a class="btn outline" id="dl-link" download="qr-mash-coffee.png">دانلود عکس</a>
+      <a class="btn outline" id="site-link" target="_blank">مشاهدهٔ منو</a>
+    </div>
+  </div>
+
+<script>
+  var SITE_URL = 'https://armanstudy.github.io/mash-coffee/';
+  document.getElementById('site-link').href = SITE_URL;
+  var canvas = document.getElementById('qr');
+  QRCode.toCanvas(canvas, SITE_URL, { width: 480, margin: 1, color: { dark: '#2B1D15', light: '#FFFFFF' } }, function (err) {
+    if (!err) document.getElementById('dl-link').href = canvas.toDataURL('image/png');
+  });
+</script>
+</body>
+</html>

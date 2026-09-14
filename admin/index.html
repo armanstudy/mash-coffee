@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>پنل مدیریت — مش کافی</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- صفحهٔ ورود با رمز -->
+  <div id="gate-screen" class="centered-screen">
+    <form id="gate-form" class="card">
+      <h1>ورود به پنل مدیریت</h1>
+      <p class="hint">رمز عبوری که برایتان تنظیم شده را وارد کنید.</p>
+      <div class="field">
+        <label for="gate-password">رمز عبور</label>
+        <input type="password" id="gate-password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn primary" style="width:100%">ورود</button>
+      <div id="gate-error" class="error-msg"></div>
+    </form>
+  </div>
+
+  <!-- صفحهٔ اتصال به گیت‌هاب -->
+  <div id="setup-screen" class="centered-screen" hidden>
+    <form id="setup-form" class="card">
+      <h1>اتصال به گیت‌هاب</h1>
+      <p class="hint">برای ذخیرهٔ تغییرات، پنل باید مستقیماً به ریپوی گیت‌هاب سایت وصل شود.</p>
+      <div class="help-box">
+        یک توکن دسترسی بسازید: در گیت‌هاب به
+        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Settings → Developer settings → Fine-grained tokens</a>
+        بروید، Repository access را روی همین ریپو محدود کنید و در Permissions بخش «Contents» را روی Read and write بگذارید. توکن را همین‌جا وارد کنید — فقط در همین مرورگر ذخیره می‌شود و به‌جای دیگری فرستاده نمی‌شود.
+      </div>
+      <div class="field">
+        <label for="setup-owner">نام کاربری گیت‌هاب</label>
+        <input type="text" id="setup-owner" value="armanstudy" required>
+      </div>
+      <div class="field">
+        <label for="setup-repo">نام ریپو</label>
+        <input type="text" id="setup-repo" value="mash-coffee" required>
+      </div>
+      <div class="field">
+        <label for="setup-token">توکن دسترسی گیت‌هاب</label>
+        <input type="password" id="setup-token" placeholder="github_pat_xxxxxxxx" required>
+      </div>
+      <button type="submit" class="btn primary" style="width:100%">اتصال و بارگذاری منو</button>
+      <div id="setup-error" class="error-msg"></div>
+    </form>
+  </div>
+
+  <!-- پنل اصلی -->
+  <div id="editor-screen" hidden>
+    <div class="editor-layout">
+      <div class="editor-form-col">
+        <div class="save-bar">
+          <button id="save-btn" class="btn primary">ذخیره و انتشار</button>
+          <button id="reload-btn" class="btn small">بازخوانی از گیت‌هاب</button>
+          <span id="save-status" class="save-status"></span>
+          <span class="spacer"></span>
+          <a id="view-site-link" class="btn small" href="../index.html" target="_blank">مشاهدهٔ سایت</a>
+          <a class="btn small" href="../qr.html" target="_blank">QR کد</a>
+          <button id="logout-btn" class="btn small danger">خروج</button>
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="settings">تنظیمات و ظاهر</button>
+          <button class="tab-btn" data-tab="categories">دسته‌ها و آیتم‌ها</button>
+        </div>
+
+        <div id="tab-settings" class="tab-panel active">
+          <div class="section-title">مشخصات کافه</div>
+          <div class="field"><label>نام کافه</label><input type="text" id="f-cafeName"></div>
+          <div class="field"><label>شعار / تگ‌لاین</label><input type="text" id="f-tagline"></div>
+          <div class="field">
+            <label class="toggle"><input type="checkbox" id="f-siteEnabled"> منو برای بازدیدکنندگان فعال باشد</label>
+          </div>
+          <div class="field"><label>پیام هنگام غیرفعال بودن منو</label><input type="text" id="f-closedMessage"></div>
+
+          <div class="section-title">آیکن سربرگ</div>
+          <div class="field"><div class="icon-select" id="logo-icon-select"></div></div>
+
+          <div class="section-title">فونت‌ها</div>
+          <div class="grid-2">
+            <div class="field"><label>فونت متن</label><select id="f-font"></select></div>
+            <div class="field"><label>فونت تیتر</label><select id="f-displayFont"></select></div>
+          </div>
+
+          <div class="section-title">رنگ‌ها — حالت روشن</div>
+          <div class="grid-3" id="colors-light"></div>
+          <div class="section-title">رنگ‌ها — حالت تاریک</div>
+          <div class="grid-3" id="colors-dark"></div>
+
+          <div class="section-title">اطلاعات تماس و پانویس</div>
+          <div class="field"><label>آدرس</label><input type="text" id="f-address"></div>
+          <div class="grid-2">
+            <div class="field"><label>تلفن</label><input type="text" id="f-phone"></div>
+            <div class="field"><label>لینک اینستاگرام</label><input type="url" id="f-instagram"></div>
+          </div>
+          <div class="field"><label>متن لینک اینستاگرام</label><input type="text" id="f-instagramLabel"></div>
+          <div class="field">
+            <label>ساعت‌های کاری</label>
+            <div id="hours-list"></div>
+            <button type="button" class="btn small" id="add-hours-btn">+ افزودن ردیف ساعت کاری</button>
+          </div>
+          <div class="field"><label>یادداشت پایین منو (مثل توضیح قیمت‌ها)</label><input type="text" id="f-serviceNote"></div>
+        </div>
+
+        <div id="tab-categories" class="tab-panel">
+          <div id="categories-list"></div>
+          <button type="button" class="btn" id="add-category-btn">+ افزودن دستهٔ جدید</button>
+        </div>
+      </div>
+
+      <div class="editor-preview-col">
+        <div class="preview-toolbar">
+          <strong style="font-size:.85rem">پیش‌نمایش زنده</strong>
+          <div class="modes">
+            <button type="button" class="btn small" id="preview-light-btn">روشن</button>
+            <button type="button" class="btn small" id="preview-dark-btn">تاریک</button>
+          </div>
+        </div>
+        <div class="preview-frame-wrap">
+          <div class="preview-phone">
+            <div id="preview-root" class="menu-app"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="../assets/menu-render.js"></script>
+<script src="github-api.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

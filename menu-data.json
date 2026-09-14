@@ -1,0 +1,118 @@
+{
+  "settings": {
+    "cafeName": "مش کافی",
+    "tagline": "قهوهٔ تازه‌دم، هر روز از ساعت ۹ صبح",
+    "logoIcon": "cup",
+    "siteEnabled": true,
+    "closedMessage": "منو موقتاً در دسترس نیست.",
+    "font": "Vazirmatn",
+    "displayFont": "Lalezar",
+    "colors": {
+      "ground": "#FBF4EA",
+      "surface": "#FFFDF9",
+      "ink": "#2B1D15",
+      "ink2": "#7B5F4C",
+      "line": "#E9DAC7",
+      "accent": "#C0721C",
+      "accentSoft": "#F6E5CF",
+      "pistachio": "#5F7A4F"
+    },
+    "colorsDark": {
+      "ground": "#191109",
+      "surface": "#241911",
+      "ink": "#F6EADC",
+      "ink2": "#B59A80",
+      "line": "#3B2A1D",
+      "accent": "#E9A24C",
+      "accentSoft": "#3A2614",
+      "pistachio": "#93AF7C"
+    },
+    "address": "تهران، خیابان نمونه، کوچهٔ دوم، پلاک ۱۲",
+    "phone": "۰۲۱-۱۲۳۴۵۶۷۸",
+    "instagram": "https://instagram.com/",
+    "instagramLabel": "اینستاگرام کافه",
+    "hoursLines": [
+      { "label": "شنبه تا پنجشنبه", "value": "۹ صبح تا ۱۱ شب" },
+      { "label": "جمعه", "value": "۱۰ صبح تا ۱۱ شب" }
+    ],
+    "serviceNote": "قیمت‌ها به تومان و شامل ۱۰٪ حق سرویس نیست."
+  },
+  "categories": [
+    {
+      "id": "hot",
+      "title": "قهوهٔ گرم",
+      "icon": "cup",
+      "enabled": true,
+      "items": [
+        { "id": "espresso", "name": "اسپرسو", "desc": "تک‌شات، دانهٔ رست متوسط", "price": "۶۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "americano", "name": "آمریکانو", "desc": "اسپرسو با آب داغ", "price": "۷۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "cappuccino", "name": "کاپوچینو", "desc": "یک‌سوم اسپرسو، یک‌سوم شیر، یک‌سوم فوم", "price": "۱۰۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "latte", "name": "لاته", "desc": "شیر بخارداده با لطافت زیاد، نقش‌دار", "price": "۱۱۰٬۰۰۰", "badge": "پرفروش", "image": "", "enabled": true },
+        { "id": "mocha", "name": "موکا", "desc": "اسپرسو، شیر و سس شکلات تلخ", "price": "۱۲۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "turkish", "name": "قهوهٔ ترک", "desc": "دم‌شده در جِزوه، با هل", "price": "۸۵٬۰۰۰", "badge": "", "image": "", "enabled": true }
+      ]
+    },
+    {
+      "id": "cold",
+      "title": "قهوهٔ سرد",
+      "icon": "coldcup",
+      "enabled": true,
+      "items": [
+        { "id": "ice-americano", "name": "آیس آمریکانو", "desc": "اسپرسو، آب سرد و یخ", "price": "۹۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "ice-latte", "name": "آیس لاته", "desc": "شیر سرد روی دو شات اسپرسو", "price": "۱۲۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "affogato", "name": "آفوگاتو", "desc": "بستنی وانیلی با یک شات اسپرسوی داغ", "price": "۱۳۵٬۰۰۰", "badge": "پیشنهاد ما", "image": "", "enabled": true },
+        { "id": "frappuccino", "name": "فراپاچینو", "desc": "قهوه، شیر و یخ ساییده با خامه", "price": "۱۴۵٬۰۰۰", "badge": "", "image": "", "enabled": true }
+      ]
+    },
+    {
+      "id": "tea",
+      "title": "چای و دمنوش",
+      "icon": "teapot",
+      "enabled": true,
+      "items": [
+        { "id": "black-tea", "name": "چای سیاه", "desc": "تازه‌دم، با نبات", "price": "۴۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "saffron-tea", "name": "چای زعفرانی", "desc": "با زعفران قائنات و هل", "price": "۶۰٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "herbal", "name": "دمنوش به‌لیمو و بابونه", "desc": "بدون کافئین، مناسب عصرها", "price": "۶۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "hot-chocolate", "name": "هات چاکلت", "desc": "شکلات تلخ ۷۰٪ با شیر پرچرب", "price": "۱۱۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "saffron-milk", "name": "شیر زعفران و پسته", "desc": "گرم، با خلال پسته", "price": "۱۲۰٬۰۰۰", "badge": "", "image": "", "enabled": true }
+      ]
+    },
+    {
+      "id": "shake",
+      "title": "شیک و اسموتی",
+      "icon": "shake",
+      "enabled": true,
+      "items": [
+        { "id": "choc-shake", "name": "شیک شکلات", "desc": "بستنی، شیر و شکلات، با تاپینگ", "price": "۱۴۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "pistachio-shake", "name": "شیک پسته", "desc": "با پستهٔ خام آسیاب‌شده", "price": "۱۶۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "mango-smoothie", "name": "اسموتی انبه", "desc": "انبه، ماست چکیده و عسل", "price": "۱۳۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "mint-lemonade", "name": "لیموناد نعناع", "desc": "آب‌لیموی تازه با نعناع و سودا", "price": "۹۵٬۰۰۰", "badge": "", "image": "", "enabled": true }
+      ]
+    },
+    {
+      "id": "cake",
+      "title": "کیک و دسر",
+      "icon": "cake",
+      "enabled": true,
+      "items": [
+        { "id": "cheesecake", "name": "چیزکیک توت‌فرنگی", "desc": "با سس توت‌فرنگی تازه", "price": "۱۶۵٬۰۰۰", "badge": "پرفروش", "image": "", "enabled": true },
+        { "id": "brownie", "name": "براونی شکلاتی", "desc": "گرم، با بستنی وانیلی", "price": "۱۳۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "carrot-cake", "name": "کیک هویج و گردو", "desc": "با فراستینگ پنیری", "price": "۱۲۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "faloodeh", "name": "فرنی زعفرانی", "desc": "سرد سرو می‌شود، با دارچین", "price": "۹۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "cookie", "name": "کوکی شکلاتی", "desc": "تازه از فر، هر روز صبح", "price": "۶۵٬۰۰۰", "badge": "", "image": "", "enabled": true }
+      ]
+    },
+    {
+      "id": "break",
+      "title": "صبحانه",
+      "icon": "breakfast",
+      "enabled": true,
+      "items": [
+        { "id": "tomato-omelet", "name": "املت گوجه", "desc": "دو تخم‌مرغ، با نان تست", "price": "۱۴۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "mushroom-egg", "name": "نیمرو با قارچ و پنیر", "desc": "در ماهی‌تابهٔ چدنی", "price": "۱۶۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "bread-cheese", "name": "بشقاب نان و پنیر و گردو", "desc": "با سبزی تازه و مربای هویج", "price": "۱۵۵٬۰۰۰", "badge": "", "image": "", "enabled": true },
+        { "id": "avocado-toast", "name": "تست آووکادو", "desc": "نان چاودار، تخم‌مرغ آب‌پز و کنجد", "price": "۱۸۵٬۰۰۰", "badge": "", "image": "", "enabled": true }
+      ]
+    }
+  ]
+}
