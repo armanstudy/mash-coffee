@@ -81,8 +81,21 @@
           </div>
           <div class="field"><label>پیام هنگام غیرفعال بودن منو</label><input type="text" id="f-closedMessage"></div>
 
-          <div class="section-title">آیکن سربرگ</div>
-          <div class="field"><div class="icon-select" id="logo-icon-select"></div></div>
+          <div class="section-title">لوگوی سربرگ</div>
+          <div class="field">
+            <label>لوگوی خودتان را آپلود کنید (اختیاری — در صورت آپلود، جایگزین آیکن زیر می‌شود)</label>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="item-thumb" style="width:64px;height:64px;border-radius:50%">
+                <div class="item-thumb-preview" id="logo-thumb-preview"></div>
+                <input type="file" accept="image/*" id="logo-file-input">
+              </div>
+              <button type="button" class="btn small danger" id="remove-logo-btn">حذف لوگو</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>یا یکی از آیکن‌های آماده را انتخاب کنید</label>
+            <div class="icon-select" id="logo-icon-select"></div>
+          </div>
 
           <div class="section-title">فونت‌ها</div>
           <div class="grid-2">
@@ -90,9 +103,13 @@
             <div class="field"><label>فونت تیتر</label><select id="f-displayFont"></select></div>
           </div>
 
-          <div class="section-title">رنگ‌ها — حالت روشن</div>
+          <div class="section-title">
+            رنگ‌ها
+            <button type="button" class="btn small" id="reset-colors-btn" style="margin-inline-start:10px;font-weight:400">بازگردانی به رنگ‌های پیش‌فرض</button>
+          </div>
+          <div class="section-title" style="font-size:.9rem;margin-top:14px">حالت روشن</div>
           <div class="grid-3" id="colors-light"></div>
-          <div class="section-title">رنگ‌ها — حالت تاریک</div>
+          <div class="section-title" style="font-size:.9rem">حالت تاریک</div>
           <div class="grid-3" id="colors-dark"></div>
 
           <div class="section-title">اطلاعات تماس و پانویس</div>

@@ -7,6 +7,11 @@ const SS_UNLOCKED = 'mashcoffee_admin_unlocked';
 
 const FONT_OPTIONS = ['Vazirmatn', 'Noto Sans Arabic', 'Noto Naskh Arabic', 'Amiri', 'Lalezar', 'Aref Ruqaa', 'Reem Kufi'];
 
+const DEFAULT_COLORS = {
+  colors: { ground: '#FBF4EA', surface: '#FFFDF9', ink: '#2B1D15', ink2: '#7B5F4C', line: '#E9DAC7', accent: '#C0721C', accentSoft: '#F6E5CF', pistachio: '#5F7A4F' },
+  colorsDark: { ground: '#191109', surface: '#241911', ink: '#F6EADC', ink2: '#B59A80', line: '#3B2A1D', accent: '#E9A24C', accentSoft: '#3A2614', pistachio: '#93AF7C' }
+};
+
 const COLOR_FIELDS = [
   { key: 'ground', label: 'پس‌زمینه' },
   { key: 'surface', label: 'سطح کارت‌ها / پانویس' },
@@ -20,7 +25,7 @@ const COLOR_FIELDS = [
 
 let draft = null;
 let previewMode = 'light';
-// key: `${catId}::${itemId}` -> { filename, base64, dataUrl }
+// key -> { filename, base64, apply() } — apply() writes the final path into draft after upload
 let pendingImages = {};
 
 const $ = sel => document.querySelector(sel);
@@ -143,6 +148,33 @@ $('#preview-dark-btn').addEventListener('click', () => { previewMode = 'dark'; r
 
 /* ---------------- settings tab: static one-time build ---------------- */
 function buildStaticForm(){
+  const logoPreview = $('#logo-thumb-preview');
+  updateThumbPreview(logoPreview, { image: draft.settings.logoImage || '' });
+  $('#logo-file-input').addEventListener('change', async e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const { dataUrl, base64 } = await compressImage(file);
+    const filename = 'images/logo.jpg';
+    pendingImages['settings::logo'] = { filename, base64, apply: () => { draft.settings.logoImage = filename; } };
+    draft.settings.logoImage = dataUrl;
+    updateThumbPreview(logoPreview, { image: dataUrl });
+    renderPreview();
+  });
+  $('#remove-logo-btn').addEventListener('click', () => {
+    draft.settings.logoImage = '';
+    delete pendingImages['settings::logo'];
+    updateThumbPreview(logoPreview, { image: '' });
+    renderPreview();
+  });
+
+  $('#reset-colors-btn').addEventListener('click', () => {
+    if (!confirm('رنگ‌های حالت روشن و تاریک به تنظیمات پیش‌فرض اولیه بازگردانده شود؟')) return;
+    draft.settings.colors = { ...DEFAULT_COLORS.colors };
+    draft.settings.colorsDark = { ...DEFAULT_COLORS.colorsDark };
+    renderSettingsForm();
+    renderPreview();
+  });
+
   const iconWrap = $('#logo-icon-select');
   iconWrap.innerHTML = '';
   ICON_KEYS.forEach(key => {
@@ -230,6 +262,7 @@ function renderSettingsForm(){
   $('#f-font').value = s.font || 'Vazirmatn';
   $('#f-displayFont').value = s.displayFont || 'Lalezar';
   highlightLogoIcon();
+  updateThumbPreview($('#logo-thumb-preview'), { image: s.logoImage || '' });
 
   document.querySelectorAll('#colors-light input[type=color]').forEach(inp => {
     inp.value = (s.colors && s.colors[inp.dataset.key]) || '#ffffff';
@@ -290,6 +323,7 @@ function renderCategoriesList(){
       type: 'button', class: 'btn small danger', onclick: e => {
         e.stopPropagation();
         if (confirm(`دستهٔ «${cat.title}» و همهٔ آیتم‌های آن حذف شود؟`)){
+          (cat.items || []).forEach(it => delete pendingImages[cat.id + '::' + it.id]);
           draft.categories.splice(catIdx, 1);
           renderCategoriesList(); renderPreview();
         }
@@ -363,7 +397,7 @@ function buildItemRow(cat, catIdx, item, itemIdx){
       const { dataUrl, base64 } = await compressImage(file);
       const key = cat.id + '::' + item.id;
       const filename = 'images/' + cat.id + '-' + item.id + '.jpg';
-      pendingImages[key] = { filename, base64 };
+      pendingImages[key] = { filename, base64, apply: () => { item.image = filename; } };
       item.image = dataUrl;
       updateThumbPreview(preview, item);
       renderPreview();
@@ -466,15 +500,12 @@ $('#save-btn').addEventListener('click', async () => {
     const keys = Object.keys(pendingImages);
     for (let i = 0; i < keys.length; i++){
       const key = keys[i];
-      const { filename, base64 } = pendingImages[key];
+      const { filename, base64, apply } = pendingImages[key];
       setStatus(`در حال آپلود عکس (${i + 1} از ${keys.length})...`);
       let sha;
       try { const existing = await GitHubAPI.getFile(filename); sha = existing ? existing.sha : undefined; } catch (e) {}
       await GitHubAPI.putBinaryFile(filename, base64, 'آپلود عکس منو از پنل مدیریت', sha);
-      const [catId, itemId] = key.split('::');
-      const cat = draft.categories.find(c => c.id === catId);
-      const item = cat && cat.items.find(it => it.id === itemId);
-      if (item) item.image = filename;
+      apply();
       delete pendingImages[key];
     }
 

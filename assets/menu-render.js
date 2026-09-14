@@ -64,11 +64,15 @@ function renderMenu(rootEl, data, forceMode){
   rootEl.innerHTML = '';
   applyTheme(rootEl, settings, forceMode);
 
+  const markHtml = settings.logoImage
+    ? `<img src="${escapeHtml(settings.logoImage)}" alt="">`
+    : iconSvg(settings.logoIcon);
+
   if (settings.siteEnabled === false){
     rootEl.innerHTML = `
       <div class="wrap closed-wrap">
         <div class="head">
-          <div class="mark">${iconSvg(settings.logoIcon)}</div>
+          <div class="mark">${markHtml}</div>
           <h1>${escapeHtml(settings.cafeName || '')}</h1>
         </div>
         <p class="closed-msg">${escapeHtml(settings.closedMessage || 'منو موقتاً در دسترس نیست.')}</p>
@@ -114,7 +118,7 @@ function renderMenu(rootEl, data, forceMode){
   rootEl.innerHTML = `
     <div class="wrap" dir="rtl" lang="fa">
       <header class="head">
-        <div class="mark" aria-hidden="true">${iconSvg(settings.logoIcon)}</div>
+        <div class="mark" aria-hidden="true">${markHtml}</div>
         <h1>${escapeHtml(settings.cafeName || '')}</h1>
         ${settings.tagline ? `<p class="tagline">${escapeHtml(settings.tagline)}</p>` : ''}
       </header>
