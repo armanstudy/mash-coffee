@@ -28,7 +28,12 @@ const INSTAGRAM_ICON = '<rect x="4" y="4" width="16" height="16" rx="5"/><circle
 const CLOCK_ICON = '<circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 2"/>';
 
 function applyTheme(rootEl, settings, forceMode){
-  const dark = forceMode ? forceMode === 'dark' : !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  let mode = forceMode;
+  if (!mode){
+    if (settings.themeMode === 'light' || settings.themeMode === 'dark') mode = settings.themeMode;
+    else mode = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  }
+  const dark = mode === 'dark';
   const palette = (dark && settings.colorsDark) ? settings.colorsDark : settings.colors;
   const map = {
     ground:'--ground', surface:'--surface', ink:'--ink', ink2:'--ink-2',

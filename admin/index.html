@@ -81,6 +81,15 @@
           </div>
           <div class="field"><label>پیام هنگام غیرفعال بودن منو</label><input type="text" id="f-closedMessage"></div>
 
+          <div class="field">
+            <label for="f-themeMode">حالت رنگ سایت برای بازدیدکنندگان</label>
+            <select id="f-themeMode">
+              <option value="auto">خودکار (بر اساس تنظیم گوشیِ هر بازدیدکننده)</option>
+              <option value="light">همیشه روشن</option>
+              <option value="dark">همیشه تاریک</option>
+            </select>
+          </div>
+
           <div class="section-title">لوگوی سربرگ</div>
           <div class="field">
             <label>لوگوی خودتان را آپلود کنید (اختیاری — در صورت آپلود، جایگزین آیکن زیر می‌شود)</label>
@@ -134,12 +143,15 @@
       </div>
 
       <div class="editor-preview-col">
-        <div class="preview-toolbar">
-          <strong style="font-size:.85rem">پیش‌نمایش زنده</strong>
-          <div class="modes">
-            <button type="button" class="btn small" id="preview-light-btn">روشن</button>
-            <button type="button" class="btn small" id="preview-dark-btn">تاریک</button>
+        <div class="preview-toolbar" style="flex-direction:column;align-items:stretch;gap:6px">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <strong style="font-size:.85rem">پیش‌نمایش زنده</strong>
+            <div class="modes">
+              <button type="button" class="btn small" id="preview-light-btn">روشن</button>
+              <button type="button" class="btn small" id="preview-dark-btn">تاریک</button>
+            </div>
           </div>
+          <span style="font-size:.72rem;color:var(--a-ink2)">این دو دکمه فقط برای دیدن هر دو حالت رنگی هنگام ویرایش است؛ برای تعیین حالت واقعی سایت از «حالت رنگ سایت» در تب تنظیمات استفاده کنید.</span>
         </div>
         <div class="preview-frame-wrap">
           <div class="preview-phone">
