@@ -21,7 +21,7 @@
   }
   h1{ font-family:"Lalezar",sans-serif; font-weight:400; font-size:1.8rem; margin:0 0 4px; }
   p.sub{ margin:0 0 20px; color:#7B5F4C; font-size:.9rem; }
-  canvas{ width:100%; height:auto; max-width:260px; border-radius:12px; }
+  #qr-img{ display:block; width:260px; max-width:100%; aspect-ratio:1/1; margin:0 auto; border-radius:12px; }
   .actions{ margin-top:20px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
   a.btn, button.btn{
     display:inline-block; padding:9px 18px; border-radius:10px; text-decoration:none;
@@ -39,7 +39,7 @@
   <div class="card">
     <h1>مش کافی</h1>
     <p class="sub">برای دیدن منو، کد را اسکن کنید</p>
-    <canvas id="qr" hidden></canvas>
+    <img id="qr-img" alt="QR کد منو" hidden>
     <p id="qr-fallback" class="sub" hidden>نمایش تصویر QR ممکن نشد. برای دیدن منو مستقیم روی لینک زیر بزنید:<br><a id="fallback-link" target="_blank"></a></p>
     <div class="actions">
       <button class="btn" onclick="window.print()">چاپ</button>
@@ -51,16 +51,18 @@
 <script>
   var SITE_URL = 'https://armanstudy.github.io/mash-coffee/';
   document.getElementById('site-link').href = SITE_URL;
-  var canvas = document.getElementById('qr');
 
   if (typeof QRCode === 'undefined'){
     showFallback();
   } else {
-    QRCode.toCanvas(canvas, SITE_URL, { width: 480, margin: 1, color: { dark: '#2B1D15', light: '#FFFFFF' } }, function (err) {
+    QRCode.toDataURL(SITE_URL, { width: 480, margin: 1, color: { dark: '#2B1D15', light: '#FFFFFF' } }, function (err, url) {
       if (err){ showFallback(); return; }
-      canvas.hidden = false;
-      document.getElementById('dl-link').hidden = false;
-      document.getElementById('dl-link').href = canvas.toDataURL('image/png');
+      var img = document.getElementById('qr-img');
+      img.src = url;
+      img.hidden = false;
+      var dl = document.getElementById('dl-link');
+      dl.href = url;
+      dl.hidden = false;
     });
   }
 
