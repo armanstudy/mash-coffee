@@ -6,7 +6,7 @@
 <title>QR کد منوی مش کافی</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&family=Lalezar&display=swap">
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
 <style>
   :root{ --ink:#2B1D15; --accent:#C0721C; --ground:#FBF4EA; }
   *{box-sizing:border-box}
@@ -39,10 +39,11 @@
   <div class="card">
     <h1>مش کافی</h1>
     <p class="sub">برای دیدن منو، کد را اسکن کنید</p>
-    <canvas id="qr"></canvas>
+    <canvas id="qr" hidden></canvas>
+    <p id="qr-fallback" class="sub" hidden>نمایش تصویر QR ممکن نشد. برای دیدن منو مستقیم روی لینک زیر بزنید:<br><a id="fallback-link" target="_blank"></a></p>
     <div class="actions">
       <button class="btn" onclick="window.print()">چاپ</button>
-      <a class="btn outline" id="dl-link" download="qr-mash-coffee.png">دانلود عکس</a>
+      <a class="btn outline" id="dl-link" download="qr-mash-coffee.png" hidden>دانلود عکس</a>
       <a class="btn outline" id="site-link" target="_blank">مشاهدهٔ منو</a>
     </div>
   </div>
@@ -51,9 +52,23 @@
   var SITE_URL = 'https://armanstudy.github.io/mash-coffee/';
   document.getElementById('site-link').href = SITE_URL;
   var canvas = document.getElementById('qr');
-  QRCode.toCanvas(canvas, SITE_URL, { width: 480, margin: 1, color: { dark: '#2B1D15', light: '#FFFFFF' } }, function (err) {
-    if (!err) document.getElementById('dl-link').href = canvas.toDataURL('image/png');
-  });
+
+  if (typeof QRCode === 'undefined'){
+    showFallback();
+  } else {
+    QRCode.toCanvas(canvas, SITE_URL, { width: 480, margin: 1, color: { dark: '#2B1D15', light: '#FFFFFF' } }, function (err) {
+      if (err){ showFallback(); return; }
+      canvas.hidden = false;
+      document.getElementById('dl-link').hidden = false;
+      document.getElementById('dl-link').href = canvas.toDataURL('image/png');
+    });
+  }
+
+  function showFallback(){
+    var f = document.getElementById('fallback-link');
+    f.href = SITE_URL; f.textContent = SITE_URL;
+    document.getElementById('qr-fallback').hidden = false;
+  }
 </script>
 </body>
 </html>
