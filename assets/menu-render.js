@@ -104,9 +104,9 @@ function renderMenu(rootEl, data, forceMode){
 
   if (settings.siteEnabled === false){
     rootEl.innerHTML = `
-      ${toggleHtml}
       <div class="wrap closed-wrap">
         <div class="head">
+          ${toggleHtml}
           <div class="mark">${markHtml}</div>
           <h1>${escapeHtml(settings.cafeName || '')}</h1>
         </div>
@@ -152,9 +152,9 @@ function renderMenu(rootEl, data, forceMode){
   }
 
   rootEl.innerHTML = `
-    ${toggleHtml}
     <div class="wrap" dir="rtl" lang="fa">
       <header class="head">
+        ${toggleHtml}
         <div class="mark" aria-hidden="true">${markHtml}</div>
         <h1>${escapeHtml(settings.cafeName || '')}</h1>
         ${settings.tagline ? `<p class="tagline">${escapeHtml(settings.tagline)}</p>` : ''}
