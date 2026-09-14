@@ -20,10 +20,10 @@
     "colorsDark": {
       "ground": "#191109",
       "surface": "#241911",
-      "ink": "#ff0019",
+      "ink": "#F6EADC",
       "ink2": "#B59A80",
       "line": "#3B2A1D",
-      "accent": "#d1c1ad",
+      "accent": "#E9A24C",
       "accentSoft": "#3A2614",
       "pistachio": "#93AF7C"
     },
