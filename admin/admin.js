@@ -206,7 +206,6 @@ function buildStaticForm(){
   bindText('#f-tagline', v => draft.settings.tagline = v);
   bindText('#f-closedMessage', v => draft.settings.closedMessage = v);
   $('#f-siteEnabled').addEventListener('change', e => { draft.settings.siteEnabled = e.target.checked; renderPreview(); });
-  $('#f-themeMode').addEventListener('change', e => { draft.settings.themeMode = e.target.value; });
   bindText('#f-address', v => draft.settings.address = v);
   bindText('#f-phone', v => draft.settings.phone = v);
   bindText('#f-instagram', v => draft.settings.instagram = v);
@@ -255,7 +254,6 @@ function renderSettingsForm(){
   $('#f-tagline').value = s.tagline || '';
   $('#f-closedMessage').value = s.closedMessage || '';
   $('#f-siteEnabled').checked = s.siteEnabled !== false;
-  $('#f-themeMode').value = s.themeMode || 'auto';
   $('#f-address').value = s.address || '';
   $('#f-phone').value = s.phone || '';
   $('#f-instagram').value = s.instagram || '';

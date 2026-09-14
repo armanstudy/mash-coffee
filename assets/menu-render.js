@@ -13,6 +13,10 @@ function iconSvg(key, cls){
   const path = ICONS[key] || ICONS.cup;
   return `<svg class="${cls||''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
 }
+function themeIconSvg(mode){
+  const path = mode === 'dark' ? SUN_ICON : MOON_ICON;
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+}
 
 function escapeHtml(s){
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -26,13 +30,23 @@ const LOCATION_ICON = '<path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/>
 const PHONE_ICON = '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 4 5.1 1 1 0 0 1 5 4z"/>';
 const INSTAGRAM_ICON = '<rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17" cy="7" r="1"/>';
 const CLOCK_ICON = '<circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 2"/>';
+const MOON_ICON = '<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/>';
+const SUN_ICON = '<circle cx="12" cy="12" r="4.5"/><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>';
 
-function applyTheme(rootEl, settings, forceMode){
-  let mode = forceMode;
-  if (!mode){
-    if (settings.themeMode === 'light' || settings.themeMode === 'dark') mode = settings.themeMode;
-    else mode = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-  }
+const THEME_STORAGE_KEY = 'mashcoffee-theme';
+function getStoredMode(){
+  try { return localStorage.getItem(THEME_STORAGE_KEY); } catch (e) { return null; }
+}
+function setStoredMode(mode){
+  try { localStorage.setItem(THEME_STORAGE_KEY, mode); } catch (e) {}
+}
+function resolveMode(forceMode){
+  if (forceMode === 'light' || forceMode === 'dark') return forceMode;
+  const stored = getStoredMode();
+  return (stored === 'light' || stored === 'dark') ? stored : 'light';
+}
+
+function applyTheme(rootEl, settings, mode){
   const dark = mode === 'dark';
   const palette = (dark && settings.colorsDark) ? settings.colorsDark : settings.colors;
   const map = {
@@ -66,15 +80,31 @@ function ensureFontsLoaded(font, displayFont){
 
 function renderMenu(rootEl, data, forceMode){
   const settings = data.settings || {};
+  const showToggle = !forceMode;
+  const mode = resolveMode(forceMode);
   rootEl.innerHTML = '';
-  applyTheme(rootEl, settings, forceMode);
+  applyTheme(rootEl, settings, mode);
 
   const markHtml = settings.logoImage
     ? `<img src="${escapeHtml(settings.logoImage)}" alt="">`
     : iconSvg(settings.logoIcon);
 
+  const toggleHtml = showToggle
+    ? `<button type="button" class="theme-toggle" id="theme-toggle-btn" aria-label="تغییر حالت روشن/تاریک">${themeIconSvg(mode)}</button>`
+    : '';
+
+  function wireToggle(){
+    if (!showToggle) return;
+    const btn = rootEl.querySelector('#theme-toggle-btn');
+    if (btn) btn.addEventListener('click', () => {
+      setStoredMode(mode === 'dark' ? 'light' : 'dark');
+      renderMenu(rootEl, data, forceMode);
+    });
+  }
+
   if (settings.siteEnabled === false){
     rootEl.innerHTML = `
+      ${toggleHtml}
       <div class="wrap closed-wrap">
         <div class="head">
           <div class="mark">${markHtml}</div>
@@ -82,6 +112,7 @@ function renderMenu(rootEl, data, forceMode){
         </div>
         <p class="closed-msg">${escapeHtml(settings.closedMessage || 'منو موقتاً در دسترس نیست.')}</p>
       </div>`;
+    wireToggle();
     return;
   }
 
@@ -121,6 +152,7 @@ function renderMenu(rootEl, data, forceMode){
   }
 
   rootEl.innerHTML = `
+    ${toggleHtml}
     <div class="wrap" dir="rtl" lang="fa">
       <header class="head">
         <div class="mark" aria-hidden="true">${markHtml}</div>
@@ -132,6 +164,7 @@ function renderMenu(rootEl, data, forceMode){
       ${settings.serviceNote ? `<p class="note">${escapeHtml(settings.serviceNote)}</p>` : ''}
       ${rows.length ? `<footer><h3>${escapeHtml(settings.cafeName || '')}</h3><div class="rows">${rows.join('')}</div></footer>` : ''}
     </div>`;
+  wireToggle();
 }
 
 function toPersianDigits(n){
