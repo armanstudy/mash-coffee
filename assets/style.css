@@ -67,12 +67,19 @@
   margin-inline:-18px;
   padding-inline:18px;
 }
+.menu-app .nav-inner{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
 .menu-app .nav-scroll{
   display:flex;
   gap:8px;
   overflow-x:auto;
   padding-block:11px;
   scrollbar-width:none;
+  flex:1;
+  min-width:0;
 }
 .menu-app .nav-scroll::-webkit-scrollbar{display:none}
 .menu-app .nav a{
@@ -252,19 +259,30 @@
 .menu-app{scroll-behavior:smooth}
 
 .menu-app .theme-toggle{
-  position:fixed;
-  top:14px;
-  right:14px;
-  z-index:20;
-  width:38px;height:38px;
   border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   background:var(--surface);
   border:1px solid var(--line);
   color:var(--accent);
   cursor:pointer;
-  box-shadow:var(--shadow);
   padding:0;
+  flex:0 0 auto;
 }
-.menu-app .theme-toggle svg{width:18px;height:18px;display:block}
+.menu-app .theme-toggle svg{width:16px;height:16px;display:block}
 .menu-app .theme-toggle:hover{border-color:var(--accent)}
+
+/* داخل نوار دسته‌ها، جزئی از جریان صفحه و همراه با نوار sticky بالا می‌ماند — روی موبایل قابل‌اعتمادتر از position:fixed است */
+.menu-app .theme-toggle-nav{
+  width:32px;height:32px;
+}
+
+/* فقط برای صفحهٔ «منو غیرفعال است» که نوار دسته‌ها ندارد */
+.menu-app .theme-toggle-floating{
+  position:fixed;
+  top:14px;
+  right:14px;
+  z-index:20;
+  width:38px;height:38px;
+  box-shadow:var(--shadow);
+}
+.menu-app .theme-toggle-floating svg{width:18px;height:18px}

@@ -90,7 +90,10 @@ function renderMenu(rootEl, data, forceMode){
     : iconSvg(settings.logoIcon);
 
   const toggleHtml = showToggle
-    ? `<button type="button" class="theme-toggle" id="theme-toggle-btn" aria-label="تغییر حالت روشن/تاریک">${themeIconSvg(mode)}</button>`
+    ? `<button type="button" class="theme-toggle theme-toggle-floating" id="theme-toggle-btn" aria-label="تغییر حالت روشن/تاریک">${themeIconSvg(mode)}</button>`
+    : '';
+  const navToggleHtml = showToggle
+    ? `<button type="button" class="theme-toggle theme-toggle-nav" id="theme-toggle-btn" aria-label="تغییر حالت روشن/تاریک">${themeIconSvg(mode)}</button>`
     : '';
 
   function wireToggle(){
@@ -152,14 +155,13 @@ function renderMenu(rootEl, data, forceMode){
   }
 
   rootEl.innerHTML = `
-    ${toggleHtml}
     <div class="wrap" dir="rtl" lang="fa">
       <header class="head">
         <div class="mark" aria-hidden="true">${markHtml}</div>
         <h1>${escapeHtml(settings.cafeName || '')}</h1>
         ${settings.tagline ? `<p class="tagline">${escapeHtml(settings.tagline)}</p>` : ''}
       </header>
-      <nav class="nav" aria-label="دسته‌بندی منو"><div class="nav-scroll">${navHtml}</div></nav>
+      <nav class="nav" aria-label="دسته‌بندی منو"><div class="nav-inner"><div class="nav-scroll">${navHtml}</div>${navToggleHtml}</div></nav>
       ${sectionsHtml}
       ${settings.serviceNote ? `<p class="note">${escapeHtml(settings.serviceNote)}</p>` : ''}
       ${rows.length ? `<footer><h3>${escapeHtml(settings.cafeName || '')}</h3><div class="rows">${rows.join('')}</div></footer>` : ''}
