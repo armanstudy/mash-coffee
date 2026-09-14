@@ -154,7 +154,7 @@
       "id": "tea",
       "title": "چای و دمنوش",
       "icon": "teapot",
-      "enabled": true,
+      "enabled": false,
       "items": [
         {
           "id": "black-tea",
@@ -207,7 +207,7 @@
       "id": "shake",
       "title": "شیک و اسموتی",
       "icon": "shake",
-      "enabled": true,
+      "enabled": false,
       "items": [
         {
           "id": "choc-shake",
@@ -304,7 +304,7 @@
       "id": "break",
       "title": "صبحانه",
       "icon": "breakfast",
-      "enabled": true,
+      "enabled": false,
       "items": [
         {
           "id": "tomato-omelet",
