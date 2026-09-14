@@ -41,7 +41,8 @@
         "value": "۱۰ صبح تا ۱۱ شب"
       }
     ],
-    "serviceNote": "قیمت‌ها به تومان و شامل ۱۰٪ حق سرویس نیست."
+    "serviceNote": "قیمت‌ها به تومان و شامل ۱۰٪ حق سرویس نیست.",
+    "logoImage": "images/logo.jpg"
   },
   "categories": [
     {
