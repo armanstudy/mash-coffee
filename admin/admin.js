@@ -352,7 +352,9 @@ function moveItem(cat, idx, dir){
 
 function buildItemRow(cat, catIdx, item, itemIdx){
   const thumb = el('div', { class: 'item-thumb' });
-  updateThumbPreview(thumb, item);
+  const preview = el('div', { class: 'item-thumb-preview' });
+  thumb.appendChild(preview);
+  updateThumbPreview(preview, item);
   const fileInput = el('input', {
     type: 'file', accept: 'image/*',
     onchange: async e => {
@@ -363,7 +365,7 @@ function buildItemRow(cat, catIdx, item, itemIdx){
       const filename = 'images/' + cat.id + '-' + item.id + '.jpg';
       pendingImages[key] = { filename, base64 };
       item.image = dataUrl;
-      updateThumbPreview(thumb, item);
+      updateThumbPreview(preview, item);
       renderPreview();
     }
   });
@@ -383,7 +385,7 @@ function buildItemRow(cat, catIdx, item, itemIdx){
     onclick: () => {
       item.image = '';
       delete pendingImages[cat.id + '::' + item.id];
-      updateThumbPreview(thumb, item);
+      updateThumbPreview(preview, item);
       renderPreview();
     }
   }, 'حذف عکس');
@@ -418,11 +420,11 @@ function buildItemRow(cat, catIdx, item, itemIdx){
   );
 }
 
-function updateThumbPreview(thumb, item){
+function updateThumbPreview(previewEl, item){
   if (item.image){
-    thumb.innerHTML = `<img src="${item.image}" alt="">`;
+    previewEl.innerHTML = `<img src="${item.image}" alt="">`;
   } else {
-    thumb.innerHTML = '<span style="font-size:.65rem;color:var(--a-ink2)">+ عکس</span>';
+    previewEl.innerHTML = '<span style="font-size:.65rem;color:var(--a-ink2)">+ عکس</span>';
   }
 }
 
