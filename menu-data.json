@@ -249,6 +249,50 @@
       ]
     },
     {
+      "id": "break",
+      "title": "صبحانه",
+      "icon": "breakfast",
+      "enabled": false,
+      "items": [
+        {
+          "id": "tomato-omelet",
+          "name": "املت گوجه",
+          "desc": "دو تخم‌مرغ، با نان تست",
+          "price": "۱۴۵٬۰۰۰",
+          "badge": "",
+          "image": "",
+          "enabled": true
+        },
+        {
+          "id": "mushroom-egg",
+          "name": "نیمرو با قارچ و پنیر",
+          "desc": "در ماهی‌تابهٔ چدنی",
+          "price": "۱۶۵٬۰۰۰",
+          "badge": "",
+          "image": "",
+          "enabled": true
+        },
+        {
+          "id": "bread-cheese",
+          "name": "بشقاب نان و پنیر و گردو",
+          "desc": "با سبزی تازه و مربای هویج",
+          "price": "۱۵۵٬۰۰۰",
+          "badge": "",
+          "image": "",
+          "enabled": true
+        },
+        {
+          "id": "avocado-toast",
+          "name": "تست آووکادو",
+          "desc": "نان چاودار، تخم‌مرغ آب‌پز و کنجد",
+          "price": "۱۸۵٬۰۰۰",
+          "badge": "",
+          "image": "",
+          "enabled": true
+        }
+      ]
+    },
+    {
       "id": "cake",
       "title": "کیک و دسر",
       "icon": "cake",
@@ -295,50 +339,6 @@
           "name": "کوکی شکلاتی",
           "desc": "تازه از فر، هر روز صبح",
           "price": "۶۵٬۰۰۰",
-          "badge": "",
-          "image": "",
-          "enabled": true
-        }
-      ]
-    },
-    {
-      "id": "break",
-      "title": "صبحانه",
-      "icon": "breakfast",
-      "enabled": true,
-      "items": [
-        {
-          "id": "tomato-omelet",
-          "name": "املت گوجه",
-          "desc": "دو تخم‌مرغ، با نان تست",
-          "price": "۱۴۵٬۰۰۰",
-          "badge": "",
-          "image": "",
-          "enabled": true
-        },
-        {
-          "id": "mushroom-egg",
-          "name": "نیمرو با قارچ و پنیر",
-          "desc": "در ماهی‌تابهٔ چدنی",
-          "price": "۱۶۵٬۰۰۰",
-          "badge": "",
-          "image": "",
-          "enabled": true
-        },
-        {
-          "id": "bread-cheese",
-          "name": "بشقاب نان و پنیر و گردو",
-          "desc": "با سبزی تازه و مربای هویج",
-          "price": "۱۵۵٬۰۰۰",
-          "badge": "",
-          "image": "",
-          "enabled": true
-        },
-        {
-          "id": "avocado-toast",
-          "name": "تست آووکادو",
-          "desc": "نان چاودار، تخم‌مرغ آب‌پز و کنجد",
-          "price": "۱۸۵٬۰۰۰",
           "badge": "",
           "image": "",
           "enabled": true
